@@ -1,0 +1,91 @@
+#define RightHorizonal_1 7
+#define RightHorizonal_2 8
+#define LeftHorizonal_1 5
+#define LeftHorizonal_2 6
+#define Vertical_1 3
+#define Vertical_2 11
+//int ENA = 9;
+//int ENB =10;
+//int ENC =12;
+void setup() {
+Serial.begin(9600);
+pinMode (RightHorizonal_1,OUTPUT);
+pinMode (RightHorizonal_2,OUTPUT);
+pinMode (LeftHorizonal_1,OUTPUT);
+pinMode (LeftHorizonal_2,OUTPUT);
+pinMode (Vertical_1,OUTPUT);
+pinMode (Vertical_2,OUTPUT);
+//pinMode (ENA, OUTPUT);
+//pinMode (ENB, OUTPUT);
+//pinMode (ENC, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  //analogWrite(ENA, 255);
+  //analogWrite(ENB, 255);
+  //analogWrite(ENC, 255);
+if (Serial.available()>0)
+  {
+    char x = Serial.read();
+    if (x=='1')       // forward
+    {
+      digitalWrite (RightHorizonal_1, 1);
+      digitalWrite (RightHorizonal_2, 0); 
+      digitalWrite (LeftHorizonal_1, 1);
+      digitalWrite (LeftHorizonal_2, 0); 
+    }
+    else if (x=='2')     // Backward
+    {
+      digitalWrite (RightHorizonal_1, 0);
+      digitalWrite (RightHorizonal_2, 1); 
+      digitalWrite (LeftHorizonal_1,0);
+      digitalWrite (LeftHorizonal_2, 1); 
+    }
+    else if (x=='3')     // Right
+    {
+      digitalWrite (RightHorizonal_1, 0);
+      digitalWrite (RightHorizonal_2, 0); 
+      digitalWrite (LeftHorizonal_1, 1);
+      digitalWrite (LeftHorizonal_2, 0); 
+    }
+    else if (x=='4')      // Left
+    {
+      digitalWrite (RightHorizonal_1, 1);
+      digitalWrite (RightHorizonal_2, 0); 
+      digitalWrite (LeftHorizonal_1, 0);
+      digitalWrite (LeftHorizonal_2, 0);
+    }
+    else if (x=='5')     // upward
+    {
+      digitalWrite (Vertical_1,1);
+      digitalWrite (Vertical_2 ,0); 
+    }
+    else if (x=='6')     // Downward
+    {
+      digitalWrite (Vertical_1, 0);
+      digitalWrite (Vertical_2 ,1); 
+    }
+    else if (x=='7') // 5 in joystick
+    {
+      digitalWrite (Vertical_1, 0);
+      digitalWrite (Vertical_2 , 0); 
+    }
+    else if (x=='8') // 3 in joystick
+    {
+      digitalWrite (RightHorizonal_1, 0);
+      digitalWrite (RightHorizonal_2, 0); 
+      digitalWrite (LeftHorizonal_1, 0);
+      digitalWrite (LeftHorizonal_2, 0);
+    }
+    else if (x=='0') // 2 in joystick
+    {
+      digitalWrite (RightHorizonal_1, 0);
+      digitalWrite (RightHorizonal_2, 0); 
+      digitalWrite (LeftHorizonal_1, 0);
+      digitalWrite (LeftHorizonal_2, 0);
+      digitalWrite (Vertical_1, 0);
+      digitalWrite (Vertical_2 , 0); 
+    }
+  }
+}
